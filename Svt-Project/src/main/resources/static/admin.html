@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+        <!-- Ukljucivanje JQuery biblioteke -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Ukljucivanje bootstrap biblioteke
+    <link rel="stylesheet" 
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
+    crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
+    crossorigin="anonymous"></script>  -->
+
+    <!-- Ukljucivanje js fajlova -->
+    <script src="js/app.js"></script>
+    <script src="js/post.js"></script>
+    <script src="js/admin.js"></script>
+    
+    <!-- Ukljucivanje css-a -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	
+	<main>
+	
+	<h1>Reddit v2.0</h1>
+	
+	<div id="dugmiciAdmin">
+	    <button class="btn btn-primary" onclick="odrediPrikaz('allPosts')" id="ButtonShowPosts">All Posts</button>
+	    <button class="btn btn-primary" onclick="odrediPrikaz('allCommunities')" id="ButtonShowCommunities">All Communities</button>
+	    <button class="btn btn-primary" onclick="logout()" id="ButtonLogOut">Logout</button>
+	 </div> 
+	   
+<!-- POSTS ----------------------------------------------------------------------------------------------------------------- -->		
+   <button class="btn btn-primary" onclick="odrediPrikaz('allPosts')" id="ButtonShowPosts" style="display: none;">All Posts</button>
+        
+<!-- All posts -->
+
+		<div id="tablePost" style="display: none;">
+	        <table class="table">
+	            <thead>
+	              <tr>
+	                <th style="text-align: center;">ID</th>
+	                <th style="text-align: center;">Title</th>
+	                <th style="text-align: center;">Text</th>
+	                <th style="text-align: center;">Creation Date</th>
+	                <th style="text-align: center;">Image Path</th>
+	                <th style="text-align: center;">Community</th>
+	                <th style="text-align: center;">User</th>
+	                <th></th>
+	              </tr>
+	            </thead>
+	            <tbody id="tbodyPost">
+	  
+	            </tbody>
+	        </table>
+	        <button id="addingPost" class="btn btn-success" onclick="odrediPrikaz('addPost')">Add Post</button>
+	        <button id="back1" class="btn btn-primary" onclick="goBackToStartPost()">Go Back</button>
+		</div>
+		
+<!-- Form for adding post -->
+
+        <div id="addPost" style="display: none;">
+            <div class="form-group">
+                <label for="naziv">Naziv:</label> 
+                <input type="text"
+                    class="form-control col-sm-5" id="title" placeholder="Enter title">
+                 <input type="hidden" id="idPost">
+
+                 <label for="naziv">Opis:</label>
+                 <input type="text"
+                 class="form-control col-sm-5" id="text" placeholder="Enter text">
+
+                 <label for="naziv">Creation date:</label>
+                 <input type="date"
+                 class="form-control col-sm-5" id="creationDate" placeholder="Enter creation date">
+                 
+                 <label for="naziv">Image path:</label>
+                 <input type="text"
+                 class="form-control col-sm-5" id="imagePath" placeholder="Enter image path">
+                 
+                 <label for="naziv">Community:</label>
+                 <input type="number"
+                 class="form-control col-sm-5" id="community" placeholder="Enter community">
+                 
+                 <label for="naziv">User:</label>
+                 <input type="number"
+                 class="form-control col-sm-5" id="user" placeholder="Enter user">
+
+            </div>
+
+            <button id="btnAddPost" onclick="submitPost()" type="submit" class="btn btn-secondary">Add</button>
+            <button id="editPost" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdatePost()">Update</button>  
+            <button id="back2" class="btn btn-primary" onclick="goBackFromAddingUpdatePost()">Go back</button>
+        </div>
+        
+        
+        
+<!-- COMMUNITIES ----------------------------------------------------------------------------------------------------------------- -->		
+   <button class="btn btn-primary" onclick="odrediPrikaz('allCommunities')" id="ButtonShowCommunities" style="display: none;">All Communities</button>
+        
+<!-- All communities -->
+
+		<div id="tableCommunity" style="display: none;">
+	        <table class="table">
+	            <thead>
+	              <tr>
+	                <th style="text-align: center;">ID</th>
+	                <th style="text-align: center;">Name</th>
+	                <th style="text-align: center;">Description</th>
+	                <th style="text-align: center;">Creation Date</th>
+	                <th style="text-align: center;">Rules</th>
+	                <th style="text-align: center;">Is Suspended</th>
+	                <th style="text-align: center;">Suspended Reason</th>
+	                <th></th>
+	              </tr>
+	            </thead>
+	            <tbody id="tbodyCommunity">
+	  
+	            </tbody>
+	        </table>
+	        <button id="addingCommunity" class="btn btn-success" onclick="odrediPrikaz('addCommunity')">Add Community</button>
+	        <button id="back3" class="btn btn-primary" onclick="goBackToStartCommunity()">Go Back</button>
+		</div>
+		
+<!-- Form for adding community -->
+
+        <div id="addCommunity" style="display: none;">
+            <div class="form-group">
+                <label for="naziv">Name:</label> 
+                <input type="text"
+                    class="form-control col-sm-5" id="nameCommunity" placeholder="Enter Name">
+                 <input type="hidden" id="idCommunity">
+
+                 <label for="naziv">Description:</label>
+                 <input type="text"
+                 class="form-control col-sm-5" id="descriptionCommunity" placeholder="Enter Description">
+
+                 <label for="naziv">Creation date:</label>
+                 <input type="date"
+                 class="form-control col-sm-5" id="creationDateCommunity" placeholder="Enter creation date">
+                 
+                 <label for="naziv">Rules:</label>
+                 <input type="text"
+                 class="form-control col-sm-5" id="rulesCommunity" placeholder="Enter Rules">
+                                
+                 <label for="naziv">Suspended Reason:</label>
+                 <input type="number"
+                 class="form-control col-sm-5" id="suspendedReasonCommunity" placeholder="Enter Suspended Reason">
+
+            </div>
+
+            <button id="btnAddCommunity" onclick="submitCommunity()" type="submit" class="btn btn-secondary">Add</button>
+            <button id="editCommunity" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdateCommunity()">Update</button>  
+            <button id="back4" class="btn btn-primary" onclick="goBackFromAddingUpdateCommunity()">Go back</button>
+        </div>
+<!-- ------------------------------------------------------------------------------------------------------------------------------ -->  
+  
+		
+<!-- 	    
+     	<button class="btn btn-primary" onclick="pokaziDugmiceKorisnika()" id="DugmePrikazKorisnike" style="display: none;">Korisnici</button>
+   
+	    <div id="prikazDugicaSvihKorisnika" style="display: none;">
+		    <button class="btn btn-primary" onclick="odrediPrikaz('sviAdministratori')" id="DugmePrikazAdmina">Administratori</button>
+		    <button class="btn btn-primary" onclick="odrediPrikaz('sviProdavci')" id="DugmePrikazProdavaca">Prodavci</button>
+		    <button class="btn btn-primary" onclick="odrediPrikaz('sviKupci')" id="DugmePrikazKupaca">Kupci</button>		    
+	    </div>
+	     --> 
+
+    </main>
+</body>
+</html>
