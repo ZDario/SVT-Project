@@ -59,12 +59,12 @@ function submitPost(){
 	var communityInput = "";
 	var userInput = "";
 
-    titleInput = $("#titlePost").val();
-    textInput = $("#textPost").val();
-    creationDateInput = $("#creationDatePost").val();
-    imagePathInput = $("#imagePathPost").val();
-    communityInput = $("#communityPost").val();
-    userInput = $("#userPost").val();
+    titleInput = $("#title").val();
+    textInput = $("#text").val();
+    creationDateInput = $("#creationDate").val();
+    imagePathInput = $("#imagePath").val();
+    communityInput = $("#community").val();
+    userInput = $("#user").val();
 
 
     var titleError;
