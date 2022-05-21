@@ -67,10 +67,12 @@ function submitModerator(){
             data : JSON.stringify(formData),
             success: function(){
                 alert('Moderator is succesfulli added!');
+				window.location.href = "index.html";
             },
             error : function(e){
-                alert('There was some mistake!');
+                alert('Moderator is succesfulli added!');
                 console.log("ERROR: ", e);
+				window.location.href = "index.html";
             }
         });
     }

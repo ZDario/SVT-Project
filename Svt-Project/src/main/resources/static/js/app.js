@@ -32,8 +32,8 @@ function login(){
     }
     else{
         var formData = {
-                "uName" : userNameInput,
-                "pass" : passwordInput
+                "userName" : userNameInput,
+                "password" : passwordInput
         }
 
         $.ajax({
@@ -43,7 +43,7 @@ function login(){
             data : JSON.stringify(formData),
             success: function (response) {
 
-            	if(response.banned === true){
+            	if(response.isBanned === true){
             		alert("User is banned!");
             	}else if(response.userType === "REDDITOR"){
         			window.location.href = "redditor.html";

@@ -16,7 +16,7 @@ public class ModeratorDTO {
 	private boolean isBanned;
 	private UserType userType;
 	private Long idCommunity;
-	private String name;
+    private String name;
 	
 	public ModeratorDTO() {
 		super();
@@ -33,7 +33,6 @@ public class ModeratorDTO {
         this.isBanned = isBanned;
         this.userType = userType;
         this.idCommunity = idCommunity;
-        this.name = name;
     }
     
 	public ModeratorDTO(Moderator moderator) {
@@ -120,5 +119,6 @@ public class ModeratorDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	
 }

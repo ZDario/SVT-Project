@@ -108,7 +108,7 @@ function submitPost(){
             "text" : textInput,
             "creationDate" : creationDateInput,
             "imagePath" : imagePathInput,
-			"idCommunit" : communityInput,
+			"idCommunity" : communityInput,
 			"idUser" : userInput
         }
 
@@ -119,7 +119,7 @@ function submitPost(){
             data : JSON.stringify(formData),
             success: function(){
                 alert('Post is succesfully added!');
-                odrediPrikaz('allPosts');
+                showFormPosts();
             },
             error : function(e){
                 alert('There was some mistake!');
@@ -231,8 +231,9 @@ function goBackToStartPost(){
 	$('#ButtonShowPosts').show();
 }
 
-function goBackFromAddingUpdatePost(){
-	$('#tablePost').show();
-	$('#addPost').hide();
+function showFormPosts(){
+	$("#adminButtons").hide();
+	$("#tablePost").show();
+	$("#addPost").hide();
 	$('#addingPost').show();
 }

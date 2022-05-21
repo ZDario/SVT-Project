@@ -59,6 +59,7 @@ function submitRedditor(){
             data : JSON.stringify(formData),
             success: function(){
                 alert('Redditor is succesfulli added!');
+				window.location.href = "index.html";
             },
             error : function(e){
                 alert('There was some mistake!');

@@ -30,9 +30,11 @@ public class PostController {
 	@Autowired
 	PostServiceInterface postServiceInterface;
 	
-	CommunityServiceInterface communityServiceInterface;
-	
+	@Autowired
 	UserServiceInterface userServiceInterface;
+	
+	@Autowired
+	CommunityServiceInterface communityServiceInterface;
 	
 	@GetMapping
 	public ResponseEntity<List<PostDTO>> getPosts(){

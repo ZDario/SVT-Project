@@ -58,6 +58,7 @@ public class UserController{
 			usDTO.setUserName(redditor.getUserName());
 			usDTO.setPassword(redditor.getPassword());
 			usDTO.setUserType(redditor.getUserType());
+			usDTO.setRegistrationDate(redditor.getRegistrationDate());
 			usDTO.setBanned(redditor.isBanned());
 			session.setAttribute(ModeratorController.MODERATOR_KEY, moderator);
 			return new ResponseEntity<UserDTO>(usDTO,HttpStatus.OK);

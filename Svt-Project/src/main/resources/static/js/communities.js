@@ -98,11 +98,11 @@ function submitCommunity(){
     }
     else{
         var formData = {
-            "nameCommunity" : nameInput,
-            "descriptionCommunity" : descriptionInput,
-            "creationDateCommunity" : creationDateInput,
-            "rulesCommunity" : rulesInput,
-			"suspendedReasonCommunity" : suspendedReasonInput,
+            "name" : nameInput,
+            "description" : descriptionInput,
+            "creationDate" : creationDateInput,
+            "rules" : rulesInput,
+			"suspendedReason" : suspendedReasonInput,
         }
 
         $.ajax({
