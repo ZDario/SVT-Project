@@ -1,10 +1,3 @@
-function pokaziLogin(){
-	$('#login').show();
-	$('#btnRegistration').show();
-	$('#btnLogin').hide();
-}
-
-
 function login(){
 		
     var error = "";

@@ -27,8 +27,8 @@ function ShowAllPosts(){
                         +'<td align="center">'+result[post].text+'</a>'+'</td>'
                         +'<td align="center">'+result[post].creationDate+'</td>'
                         +'<td align="center">'+result[post].imagePath+'</td>'
-						+'<td align="center">'+result[post].community+'</td>'
-						+'<td align="center">'+result[post].user+'</td>'
+						+'<td align="center">'+result[post].idCommunity+'</td>'
+						+'<td align="center">'+result[post].idUser+'</td>'
                         +'<td>'
 							+'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="editPost('+result[post].idPost+')">UPDATE</button>'
 	                        +'<button type="submit" class="btn btn-danger" onclick="deletePost('+result[post].idPost+')">DELETE</button>'
@@ -157,7 +157,7 @@ function editPost(id){
                 title.val(result.title);
                 text.val(result.text);
                 creationDate.val(result.creationDate);
-				imagePath.val(resulrt.imagePath)
+				imagePath.val(result.imagePath)
                 community.val(result.community);
                 user.val(result.user);
 
@@ -186,7 +186,7 @@ function submitUpdatePost(){
             "text" : text,
             "creationDate" : creationDate,
             "imagePath" : imagePath,
-			"idCommunit" : community,
+			"idCommunity" : community,
 			"idUser" : user
     }
 
@@ -198,7 +198,9 @@ function submitUpdatePost(){
         data : JSON.stringify(formData),
         success: function(result){
             alert('Post is succesfully changed!');
-            odrediPrikaz('allPosts');
+			showFormPosts();
+            ShowAllPosts();
+
         },
         error : function(e){
             alert('There was an error!')
@@ -215,7 +217,7 @@ function deletePost(id){
         contentType: 'application/json; charset=utf-8',
         success: function(result){
             alert("Post is deleted!");
-            odrediPrikaz('allPosts');
+            ShowAllPosts();
         },
         error : function(e){
             alert('There was an error!')
@@ -226,8 +228,6 @@ function deletePost(id){
 
 function goBackToStartPost(){
 	$('#tablePost').hide();
-	$('#prijava').hide();
-	$('#DugmePrikazLogiina').show();
 	$('#ButtonShowPosts').show();
 }
 

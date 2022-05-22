@@ -4,12 +4,6 @@ function ShowAllCommunities(){
     var tbodyCommunity = $("#tbodyCommunity");
 
     function showCommunities(){
-    	$('#adding').show();
-	   	$('#prijava').hide();
-    	$('#btnLogin').hide();
-		$('#DugmePrikazLogiina').hide();
-
-
         $.ajax({
 
             type: "GET",
@@ -112,7 +106,7 @@ function submitCommunity(){
             data : JSON.stringify(formData),
             success: function(){
                 alert('Community is succesfully added!');
-                odrediPrikaz('allCommunities');
+                goBackFromAddingUpdateCommunity();
             },
             error : function(e){
                 alert('There was some mistake!');
@@ -175,12 +169,12 @@ function submitUpdateCommunity(){
 	var suspendedReason = $("#suspendedReasonCommunity").val();
 
     var formData = {
-            "nameCommunity" : name,
-            "descriptionCommunity" : description,
-            "creationDateCommunity" : creationDate,
-            "rulesCommunity" : rules,
-			"isSuspendedCommunity" : isSuspended,
-			"suspendedReasonCommunity" : suspendedReason
+            "name" : name,
+            "description" : description,
+            "creationDate" : creationDate,
+            "rules" : rules,
+			"isSuspended" : isSuspended,
+			"suspendedReason" : suspendedReason
     }
 
     $.ajax({
@@ -191,7 +185,9 @@ function submitUpdateCommunity(){
         data : JSON.stringify(formData),
         success: function(result){
             alert('Community is succesfully changed!');
-            odrediPrikaz('allCommunities');
+			goBackFromAddingUpdateCommunity();
+            ShowAllCommunities();
+
         },
         error : function(e){
             alert('There was an error!')
@@ -208,7 +204,7 @@ function deleteCommunity(id){
         contentType: 'application/json; charset=utf-8',
         success: function(result){
             alert("Community is deleted!");
-            odrediPrikaz('allCommunities');
+            ShowAllCommunities();
         },
         error : function(e){
             alert('There was an error!')
@@ -217,15 +213,7 @@ function deleteCommunity(id){
     });
 }
 
-function goBackToStartCommunity(){
-	$('#tableallCommunitiy').hide();
-	$('#prijava').hide();
-	$('#DugmePrikazLogiina').show();
-	$('#ButtonShowCommunities').show();
-}
-
 function goBackFromAddingUpdateCommunity(){
 	$('#tableCommunitiy').show();
 	$('#addCommunitiy').hide();
-	$('#addingCommunitiy').show();
 }

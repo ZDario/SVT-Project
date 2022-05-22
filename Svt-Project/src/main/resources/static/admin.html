@@ -41,8 +41,8 @@
 	   
 <!-- POSTS ----------------------------------------------------------------------------------------------------------------- -->		    
 <!-- All posts -->
-
 		<div id="tablePost" style="display: none;">
+		<h2>POST LIST</h2>
 	        <table class="table">
 	            <thead>
 	              <tr>
@@ -61,12 +61,13 @@
 	            </tbody>
 	        </table>
 	        <button id="addingPost" class="btn btn-success" onclick="showFormAddPost()">Add Post</button>
+	        <button id="allPostsShow" class="btn btn-primary" onclick="ShowAllPosts()">All Posts</button>
 	        <button id="back1" class="btn btn-primary" onclick="goBackToStartAdmin()">Go Back</button>
 		</div>
 		
 <!-- Form for adding post -->
-
         <div id="addPost" style="display: none;">
+        <h2>POST ADD/UPDATE</h2>
             <div class="form-group">
                 <label for="naziv">Naziv:</label> 
                 <input type="text"
@@ -104,8 +105,8 @@
         
 <!-- COMMUNITIES ----------------------------------------------------------------------------------------------------------------- -->		  
 <!-- All communities -->
-
 		<div id="tableCommunity" style="display: none;">
+		<h2>COMMUNITY LIST</h2>
 	        <table class="table">
 	            <thead>
 	              <tr>
@@ -124,12 +125,13 @@
 	            </tbody>
 	        </table>
 	        <button id="addingCommunity" class="btn btn-success" onclick="showFormAddCommunity()">Add Community</button>
+	        <button id="allCommunitiesShow" class="btn btn-primary" onclick="ShowAllCommunities()">All Communities</button>
 	        <button id="back3" class="btn btn-primary" onclick="goBackToStartAdmin()">Go Back</button>
 		</div>
 		
 <!-- Form for adding community -->
-
         <div id="addCommunity" style="display: none;">
+        <h2>COMMUNITY ADD/UPDATE</h2>
             <div class="form-group">
                 <label for="naziv">Name:</label> 
                 <input type="text"
