@@ -8,28 +8,29 @@
         <!-- Ukljucivanje JQuery biblioteke -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!-- Ukljucivanje bootstrap biblioteke
+    <!-- Ukljucivanje bootstrap biblioteke-->
     <link rel="stylesheet" 
     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
     crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
-    crossorigin="anonymous"></script> -->
+    crossorigin="anonymous"></script> 
 
     <!-- Ukljucivanje js fajlova -->
     <script src="js/app.js"></script>
     <script src="js/moderators.js"></script>
     <script src="js/redditors.js"></script>
     
-    <!-- Ukljucivanje css-a 
-    <link rel="stylesheet" href="css/style.css">-->
+    <!-- Ukljucivanje css-a -->
+    <link rel="stylesheet" href="css/register.css">
 </head>
 <body>
 
 	<main id="reg">
+	<h1>Reddit v2.0</h1>
     	<div id="registration">
-	      	<h2>Register as:</h2>
+	      	<h2 id="regAs">Register as:</h2>
 	      	<button class="btn btn-primary" onclick="showFormRedditor()" style="margin-right: 3%;">Redditor</button>
 	      	<button class="btn btn-primary" onclick="showFormModerator()">Moderator</button>
      	</div> 
@@ -38,7 +39,7 @@
 
         <div id="addRedditor" style="display: none;">
         
-        	<h1>REDDITOR</h1>
+        	<h2>REDDITOR</h2>
         
             <div class="form-group">
                 <label>User name:</label> 
@@ -63,7 +64,7 @@
                 class="form-control col-sm-5" id="registrationDateRedditor" placeholder="Enter registration date">
             </div>
          
-            <button id="btnAddRedditor" onclick="submitRedditor()" type="submit" class="btn btn-secondary">Register</button>
+            <button id="btnAddRedditor" onclick="submitRedditor()" type="submit" class="btn btn-primary">Register</button>
 
         </div>
         
@@ -71,7 +72,7 @@
 
         <div id="addModerator" style="display: none;">
         
-        	<h1>MODERATOR</h1>
+        	<h2>MODERATOR</h2>
         	
            <div class="form-group">
                 <label>User name:</label> 
@@ -101,7 +102,7 @@
             </div>
           
 
-            <button id="btnAddModerator" onclick="submitModerator()" type="submit" class="btn btn-secondary">Register</button>
+            <button id="btnAddModerator" onclick="submitModerator()" type="submit" class="btn btn-primary">Register</button>
 
         </div>
     </main>

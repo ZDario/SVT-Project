@@ -8,14 +8,14 @@
         <!-- Ukljucivanje JQuery biblioteke -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!-- Ukljucivanje bootstrap biblioteke
+    <!-- Ukljucivanje bootstrap biblioteke -->
     <link rel="stylesheet" 
     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
     crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
-    crossorigin="anonymous"></script>  -->
+    crossorigin="anonymous"></script>  
 
     <!-- Ukljucivanje js fajlova -->
     <script src="js/app.js"></script>
@@ -23,8 +23,8 @@
     <script src="js/communities.js"></script>
     <script src="js/admin.js"></script>
     
-    <!-- Ukljucivanje css-a 
-    <link rel="stylesheet" href="css/style.css">-->
+    <!-- Ukljucivanje css-a -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	
@@ -35,14 +35,74 @@
 	<div id="adminButtons">
 	    <button class="btn btn-primary" onclick="showFormPosts()">All Posts</button>
 	    <button class="btn btn-primary" onclick="showFormCommunities()">All Communities</button>
+	    <button class="btn btn-primary" onclick="showFormProfile()">Change Password</button>
 	    
 	    <button class="btn btn-primary" onclick="logout()" id="ButtonLogOut">Logout</button>
 	 </div> 
+	 
+<!-- PASSWORD CHANGE ----------------------------------------------------------------------------------------------------------------- -->	
+<!-- All posts -->
+		<div id="tableAdmin" style="display: none;">
+		<h2 class="listCenter">PROFILE</h2>
+	        <table class="table">
+	            <thead>
+	              <tr>
+	                <th style="text-align: center;">ID</th>
+	                <th style="text-align: center;">User name</th>
+	                <th style="text-align: center;">Password</th>
+	                <th style="text-align: center;">Email</th>
+	                <th style="text-align: center;">Avatar</th>
+	                <th style="text-align: center;">Registration Date</th>
+	                <th style="text-align: center;">User Type</th>
+	                <th></th>
+	              </tr>
+	            </thead>
+	            <tbody id="tbodyAdmin">
+	  
+	            </tbody>
+	        </table>
+	        <button id="allAdminShow" class="btn btn-primary" onclick="ShowProfileAdmin()">Profile</button>
+	        <button id="back1" class="btn btn-primary" onclick="goBackToStartAdmin()">Go Back</button>
+		</div>	 
+		   
+	 <div id="passwordChange" style="display: none;">
+		<h2>CHANGE PASSWORD</h2>
+            <div class="form-group">
+                <label for="naziv">User Name:</label> 
+                <input type="text"
+                    class="form-control col-sm-5" id="userName" placeholder="Enter user name" readonly>
+                 <input type="hidden" id="idUser">
+
+                 <label for="naziv">Password:</label>
+                 <input type="password"
+                 class="form-control col-sm-5" id="password" placeholder="Enter password">
+
+                 <label for="naziv">Email:</label>
+                 <input type="text"
+                 class="form-control col-sm-5" id="email" placeholder="Enter email" readonly>
+                 
+                 <label for="naziv">Avatar:</label>
+                 <input type="text"
+                 class="form-control col-sm-5" id="avatar" placeholder="Enter avatar" readonly>
+                 
+                 <label for="naziv">Registration Date:</label>
+                 <input type="date"
+                 class="form-control col-sm-5" id="registrationDate" placeholder="Enter registration date" readonly>
+                 
+                 <label for="naziv">User Type:</label>
+                 <input type="text"
+                 class="form-control col-sm-5" id="userType" placeholder="Enter user type" readonly>
+
+            </div>
+	        <button id="changePassword" onclick="submitUpdatePassword()" type="submit" class="btn btn-success">Change Password</button> 
+	        <button id="back5" class="btn btn-primary" onclick="goBackToStartAdmin()">Go Back</button>
+		</div>
+		
 	   
 <!-- POSTS ----------------------------------------------------------------------------------------------------------------- -->		    
 <!-- All posts -->
 		<div id="tablePost" style="display: none;">
-		<h2>POST LIST</h2>
+		<h2 class="listCenter">POST LIST</h2>
 	        <table class="table">
 	            <thead>
 	              <tr>
@@ -96,7 +156,7 @@
 
             </div>
 
-            <button id="btnAddPost" onclick="submitPost()" type="submit" class="btn btn-secondary">Add</button>
+            <button id="btnAddPost" onclick="submitPost()" type="submit" class="btn btn-success">Add</button>
             <button id="editPost" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdatePost()">Update</button>  
             <button id="back2" class="btn btn-primary" onclick="goBackFromAddingUpdatePost()">Go back</button>
         </div>
@@ -106,7 +166,7 @@
 <!-- COMMUNITIES ----------------------------------------------------------------------------------------------------------------- -->		  
 <!-- All communities -->
 		<div id="tableCommunity" style="display: none;">
-		<h2>COMMUNITY LIST</h2>
+		<h2 class="listCenter">COMMUNITY LIST</h2>
 	        <table class="table">
 	            <thead>
 	              <tr>
@@ -156,23 +216,11 @@
 
             </div>
 
-            <button id="btnAddCommunity" onclick="submitCommunity()" type="submit" class="btn btn-secondary">Add</button>
+            <button id="btnAddCommunity" onclick="submitCommunity()" type="submit" class="btn btn-success">Add</button>
             <button id="editCommunity" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdateCommunity()">Update</button>  
             <button id="back4" class="btn btn-primary" onclick="goBackFromAddingUpdateCommunity()">Go back</button>
         </div>
 <!-- ------------------------------------------------------------------------------------------------------------------------------ -->  
-  
-		
-<!-- 	    
-     	<button class="btn btn-primary" onclick="pokaziDugmiceKorisnika()" id="DugmePrikazKorisnike" style="display: none;">Korisnici</button>
-   
-	    <div id="prikazDugicaSvihKorisnika" style="display: none;">
-		    <button class="btn btn-primary" onclick="odrediPrikaz('sviAdministratori')" id="DugmePrikazAdmina">Administratori</button>
-		    <button class="btn btn-primary" onclick="odrediPrikaz('sviProdavci')" id="DugmePrikazProdavaca">Prodavci</button>
-		    <button class="btn btn-primary" onclick="odrediPrikaz('sviKupci')" id="DugmePrikazKupaca">Kupci</button>		    
-	    </div>
-	     --> 
-
     </main>
 </body>
 </html>

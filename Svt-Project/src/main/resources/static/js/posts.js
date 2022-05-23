@@ -4,12 +4,6 @@ function ShowAllPosts(){
     var tbodyPost = $("#tbodyPost");
 
     function showPosts(){
-    	$('#adding').show();
-//   	$('#prijava').hide();
-//    	$('#btnLogin').hide();
-//		$('#DugmePrikazLogiina').hide();
-
-
         $.ajax({
 
             type: "GET",
