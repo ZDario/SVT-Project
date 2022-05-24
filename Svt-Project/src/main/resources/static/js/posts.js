@@ -44,6 +44,9 @@ function ShowAllPosts(){
 }
 
 function submitPost(){
+	
+	$('#editPost').hide();
+	$('#btnAddPost').show();
 
     var error = "";
     var titleInput = "";
@@ -113,7 +116,8 @@ function submitPost(){
             data : JSON.stringify(formData),
             success: function(){
                 alert('Post is succesfully added!');
-                showFormPosts();
+				showFormPosts();
+            	ShowAllPosts();
             },
             error : function(e){
                 alert('There was some mistake!');
@@ -152,8 +156,8 @@ function editPost(id){
                 text.val(result.text);
                 creationDate.val(result.creationDate);
 				imagePath.val(result.imagePath)
-                community.val(result.community);
-                user.val(result.user);
+                community.val(result.idCommunity);
+                user.val(result.idUser);
 
             },
             error : function(e){
@@ -172,7 +176,7 @@ function submitUpdatePost(){
     var text = $("#text").val();
     var creationDate = $("#creationDate").val();
 	var imagePath = $("#imagePath").val();
-	var community = $("#cena").val();
+	var community = $("#community").val();
 	var user = $("#user").val();
 
     var formData = {
@@ -194,7 +198,6 @@ function submitUpdatePost(){
             alert('Post is succesfully changed!');
 			showFormPosts();
             ShowAllPosts();
-
         },
         error : function(e){
             alert('There was an error!')

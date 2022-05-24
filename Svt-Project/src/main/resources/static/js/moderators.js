@@ -57,7 +57,7 @@ function submitModerator(){
             "emailModerator" : emailInput,
             "avatarModerator" : avatarInput,
 			"registrationDateModerator" : registrationDateInput,
-			"communityModerator" : communityInput
+			"idCommunity" : communityInput
         }
 
         $.ajax({
@@ -70,9 +70,8 @@ function submitModerator(){
 				window.location.href = "index.html";
             },
             error : function(e){
-                alert('Moderator is succesfulli added!');
+                alert('There was an error!');
                 console.log("ERROR: ", e);
-				window.location.href = "index.html";
             }
         });
     }

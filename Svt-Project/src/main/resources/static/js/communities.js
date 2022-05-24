@@ -44,6 +44,9 @@ function ShowAllCommunities(){
 }
 
 function submitCommunity(){
+	
+	$('#editCommunity').hide();
+	$('#btnAddCommunity').show();
 
     var error = "";
     var nameInput = "";
@@ -107,6 +110,7 @@ function submitCommunity(){
             success: function(){
                 alert('Community is succesfully added!');
                 goBackFromAddingUpdateCommunity();
+            	ShowAllCommunities();
             },
             error : function(e){
                 alert('There was some mistake!');
@@ -187,7 +191,6 @@ function submitUpdateCommunity(){
             alert('Community is succesfully changed!');
 			goBackFromAddingUpdateCommunity();
             ShowAllCommunities();
-
         },
         error : function(e){
             alert('There was an error!')
