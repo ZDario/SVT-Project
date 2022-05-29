@@ -1,6 +1,7 @@
 package com.example.SvtProject.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,8 @@ import com.example.SvtProject.serviceInterface.UserServiceInterface;
 @RestController
 @RequestMapping(value = "api/post")
 public class PostController {
+	
+	public static final String CHOSEN_POST = "chosenPost";
 	
 	@Autowired
 	PostServiceInterface postServiceInterface;
@@ -64,10 +67,12 @@ public class PostController {
 		User user = userServiceInterface.findById(postDTO.getIdUser());
 		Community community = communityServiceInterface.findById(postDTO.getIdCommunity());
 		
+		Date creationDate = new Date();
+		
 		Post post = new Post();
 		post.setTitle(postDTO.getTitle());
 		post.setText(postDTO.getText());
-		post.setCreationDate(postDTO.getCreationDate());
+		post.setCreationDate(creationDate);
 		post.setImagePath(postDTO.getImagePath());
 		post.setUser(user);
 		post.setCommunity(community);
@@ -89,7 +94,6 @@ public class PostController {
 		
 		post.setTitle(postDTO.getTitle());
 		post.setText(postDTO.getText());
-		post.setCreationDate(postDTO.getCreationDate());
 		post.setImagePath(postDTO.getImagePath());
 		post.setUser(user);
 		post.setCommunity(community);

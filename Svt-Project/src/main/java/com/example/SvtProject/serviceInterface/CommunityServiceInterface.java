@@ -11,5 +11,4 @@ public interface CommunityServiceInterface {
 	public Community findById(Long communityId);
 	public Community save(Community community);
 	public void remove(Long id);
-
 }

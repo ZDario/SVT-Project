@@ -43,6 +43,44 @@ function ShowAllPosts(){
 
 }
 
+function ShowAllPostsHomePage(){ 
+
+    var tablePost = $("#tablePost");
+    var tbodyPost = $("#tbodyPost");
+
+    function showPosts(){
+        $.ajax({
+
+            type: "GET",
+            contentType : 'application/json; charset=utf-8',
+            url : "http://localhost:8080/api/post",
+            success : function(result){
+                tablePost.show();
+                tbodyPost.empty();
+                for(post in result){
+                    tbodyPost.append(
+                    '<tr>'
+                        +'<td align="center">'+result[post].title+'</td>'
+                        +'<td align="center">'+result[post].text+'</a>'+'</td>'
+                        +'<td align="center">'+result[post].creationDate+'</td>'
+                        +'<td align="center">'+result[post].imagePath+'</td>'
+						+'<td align="center">'+result[post].idCommunity+'</td>'
+						+'<td align="center">'+result[post].idUser+'</td>'
+                    +'</tr>'
+                    
+                    )};
+                    
+            },
+            error :function(e){
+                alert('There was a mistake!');
+            }
+
+
+        });
+    }
+    showPosts();
+}
+
 function submitPost(){
 	
 	$('#editPost').hide();
@@ -51,14 +89,12 @@ function submitPost(){
     var error = "";
     var titleInput = "";
     var textInput = "";
-    var creationDateInput = "";
     var imagePathInput = "";
 	var communityInput = "";
 	var userInput = "";
 
     titleInput = $("#title").val();
     textInput = $("#text").val();
-    creationDateInput = $("#creationDate").val();
     imagePathInput = $("#imagePath").val();
     communityInput = $("#community").val();
     userInput = $("#user").val();
@@ -66,7 +102,6 @@ function submitPost(){
 
     var titleError;
     var textError;
-    var creationDateError;
 	var imagePathError;
 	var communityError;
 	var userError;
@@ -78,10 +113,6 @@ function submitPost(){
     if(textInput === ""){
     	textError = true;
         error += "\nEnter text!";
-    }
-    if(creationDateInput === ""){
-    	creationDateError = true;
-        error += "\nEnter date!";
     }
     if(imagePathInput === ""){
     	imagePathError = true;
@@ -96,14 +127,13 @@ function submitPost(){
         error += "\nEnter user!";
     }
 
-    if(titleError || textError || creationDateError || imagePathError || communityError || userError){
+    if(titleError || textError || imagePathError || communityError || userError){
         alert(error);
     }
     else{
         var formData = {
             "title" : titleInput,
             "text" : textInput,
-            "creationDate" : creationDateInput,
             "imagePath" : imagePathInput,
 			"idCommunity" : communityInput,
 			"idUser" : userInput
@@ -116,8 +146,6 @@ function submitPost(){
             data : JSON.stringify(formData),
             success: function(){
                 alert('Post is succesfully added!');
-				showFormPosts();
-            	ShowAllPosts();
             },
             error : function(e){
                 alert('There was some mistake!');
@@ -146,7 +174,6 @@ function editPost(id){
                 var idPost = $("#idPost");
                 var title = $("#title");
                 var text = $("#text");
-                var creationDate = $("#creationDate");
 				var imagePath = $("#imagePath");
 				var community = $("#community");
 				var user = $("#user");
@@ -154,7 +181,6 @@ function editPost(id){
                 idPost.val(result.idPost);
                 title.val(result.title);
                 text.val(result.text);
-                creationDate.val(result.creationDate);
 				imagePath.val(result.imagePath)
                 community.val(result.idCommunity);
                 user.val(result.idUser);
@@ -174,7 +200,6 @@ function submitUpdatePost(){
     var id = $("#idPost").val();
     var title = $("#title").val();
     var text = $("#text").val();
-    var creationDate = $("#creationDate").val();
 	var imagePath = $("#imagePath").val();
 	var community = $("#community").val();
 	var user = $("#user").val();
@@ -182,7 +207,6 @@ function submitUpdatePost(){
     var formData = {
             "title" : title,
             "text" : text,
-            "creationDate" : creationDate,
             "imagePath" : imagePath,
 			"idCommunity" : community,
 			"idUser" : user
@@ -223,14 +247,38 @@ function deletePost(id){
     });
 }
 
+
+
 function goBackToStartPost(){
 	$('#tablePost').hide();
 	$('#ButtonShowPosts').show();
 }
 
+
+//GO BACK TO TABLE POST
+function goBackFromAddingUpdatePost(){
+	$('#tablePost').show();
+	$('#addPost').hide();
+}
+function goBackFromAddingPost(){
+	$('#tablePostsFromCommunityRedditor').show();
+	$('#addPost').hide();
+}
+//FORM LIST POST
 function showFormPosts(){
-	$("#adminButtons").hide();
+	$("#buttons").hide();
 	$("#tablePost").show();
 	$("#addPost").hide();
 	$('#addingPost').show();
+}//ADD POST FORM
+function showFormAddPost(){
+	$("#buttons").hide();
+	$("#tablePost").hide();
+	$("#addPost").show();
+	$('#tablePostsFromCommunityRedditor').hide();
+}
+
+function goBackFromAddingPostRedditor(){
+	$("#addPost").hide();
+	$('#tablePostsFromCommunityRedditor').show();
 }

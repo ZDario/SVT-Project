@@ -1,6 +1,7 @@
 package com.example.SvtProject.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,13 +53,15 @@ public class RedditorController {
 	@PostMapping
 	public ResponseEntity<RedditorDTO> addRedditor(@RequestBody RedditorDTO redditorDTO){
 
+		Date creationDate = new Date();
+		
 		Redditor redditor = new Redditor();
 		redditor.setUserName(redditorDTO.getUserNameRedditor());
 		redditor.setPassword(redditorDTO.getPasswordRedditor());
 		redditor.setEmail(redditorDTO.getEmailRedditor());
 		redditor.setAvatar(redditorDTO.getAvatarRedditor());
 		redditor.setBanned(redditorDTO.isBanned());
-		redditor.setRegistrationDate(redditorDTO.getRegistrationDateRedditor());
+		redditor.setRegistrationDate(creationDate);
 		redditor.setUserType(UserType.REDDITOR);
 		
 		redditor = redditorServiceInterface.save(redditor);
@@ -78,7 +81,6 @@ public class RedditorController {
 		redditor.setEmail(redditorDTO.getEmailRedditor());
 		redditor.setAvatar(redditorDTO.getAvatarRedditor());
 		redditor.setBanned(redditorDTO.isBanned());
-		redditor.setRegistrationDate(redditorDTO.getRegistrationDateRedditor());
 
 		redditor = redditorServiceInterface.save(redditor);
 		return new ResponseEntity<RedditorDTO>(new RedditorDTO(redditor), HttpStatus.OK);

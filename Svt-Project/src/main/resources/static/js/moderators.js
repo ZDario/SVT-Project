@@ -5,21 +5,18 @@ function submitModerator(){
     var passwordInput = "";
     var emailInput = "";
     var avatarInput = "";
-	var registrationDateInput = "";
 	var communityInput = "";
     
     userNameInput = $("#userNameModerator").val();
     passwordInput = $("#passwordModerator").val();
     emailInput = $("#emailModerator").val();
     avatarInput = $("#avatarModerator").val();
-	registrationDateInput = $("#registrationDateModerator").val();
 	communityInput = $("#communityModerator").val();
 
     var userNameError;
     var passwordError;
     var emailError;
     var avatarError;
-	var registrationDateError;
 	var communityError;
     
     if(userNameInput === ""){
@@ -38,16 +35,12 @@ function submitModerator(){
     	avatarError = true;
         error += "\nEnter avatar!";
     }
-    if(registrationDateInput === ""){
-    	registrationDateError = true;
-        error += "\nEnter registration date!";
-    }
     if(communityInput === ""){
     	communityError = true;
         error += "\nEnter community!";
     }
 
-    if(userNameError || passwordError || emailError || avatarError || registrationDateError || communityError){
+    if(userNameError || passwordError || emailError || avatarError || communityError){
         alert(error);
     }
     else{
@@ -56,7 +49,6 @@ function submitModerator(){
             "passwordModerator" : passwordInput,
             "emailModerator" : emailInput,
             "avatarModerator" : avatarInput,
-			"registrationDateModerator" : registrationDateInput,
 			"idCommunity" : communityInput
         }
 

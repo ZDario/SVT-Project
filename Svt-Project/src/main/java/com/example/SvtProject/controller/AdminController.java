@@ -1,6 +1,7 @@
 package com.example.SvtProject.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,13 +53,15 @@ public class AdminController {
 	@PostMapping
 	public ResponseEntity<AdminDTO> addAdmin(@RequestBody AdminDTO adminDTO){
 
+		Date creationDate = new Date();
+		
 		Admin admin = new Admin();
 		admin.setUserName(adminDTO.getUserNameAdmin());
 		admin.setPassword(adminDTO.getPasswordAdmin());
 		admin.setEmail(adminDTO.getEmailAdmin());
 		admin.setAvatar(adminDTO.getAvatarAdmin());
 		admin.setBanned(adminDTO.isBanned());
-		admin.setRegistrationDate(adminDTO.getRegistrationDateAdmin());
+		admin.setRegistrationDate(creationDate);
 		admin.setUserType(UserType.ADMIN);
 		
 		admin = adminServiceInterface.save(admin);
@@ -78,7 +81,6 @@ public class AdminController {
 		admin.setEmail(adminDTO.getEmailAdmin());
 		admin.setAvatar(adminDTO.getAvatarAdmin());
 		admin.setBanned(adminDTO.isBanned());
-		admin.setRegistrationDate(adminDTO.getRegistrationDateAdmin());
 
 		admin = adminServiceInterface.save(admin);
 		return new ResponseEntity<AdminDTO>(new AdminDTO(admin), HttpStatus.OK);

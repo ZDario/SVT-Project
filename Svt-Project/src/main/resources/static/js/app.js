@@ -72,3 +72,7 @@ function showFormModerator(){
 }
 
 //------------------------------------------------------------------------------------------------
+
+function logout(){
+	window.location.href = "/";
+}

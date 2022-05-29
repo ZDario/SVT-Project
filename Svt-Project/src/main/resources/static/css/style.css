@@ -22,8 +22,17 @@ h1 {
 	margin: 20px;
 }
 
-#adminButtons {
+#buttons{
 	text-align:center;
+}
+
+#addingPost, #addingCommunity, #allPostsShowHomePage {
+	margin-left: 2.5%;
+}
+
+#back1, #back3, #back5 {
+	float: right;
+	margin-right: 2.5%;
 }
 
 #passwordChange, #addPost, #addCommunity, #addRedditor, #addModerator {

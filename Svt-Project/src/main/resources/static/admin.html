@@ -32,7 +32,7 @@
 	
 	<h1>Reddit v2.0</h1>
 	
-	<div id="adminButtons">
+	<div id="buttons">
 	    <button class="btn btn-primary" onclick="showFormPosts()">All Posts</button>
 	    <button class="btn btn-primary" onclick="showFormCommunities()">All Communities</button>
 	    <button class="btn btn-primary" onclick="showFormProfile()">Change Password</button>
@@ -41,7 +41,7 @@
 	 </div> 
 	 
 <!-- PASSWORD CHANGE ----------------------------------------------------------------------------------------------------------------- -->	
-<!-- All posts -->
+<!-- Profile -->
 		<div id="tableAdmin" style="display: none;">
 		<h2 class="listCenter">PROFILE</h2>
 	        <table class="table">
@@ -79,11 +79,11 @@
 
                  <label for="naziv">Email:</label>
                  <input type="text"
-                 class="form-control col-sm-5" id="email" placeholder="Enter email" readonly>
+                 class="form-control col-sm-5" id="email" placeholder="Enter email">
                  
                  <label for="naziv">Avatar:</label>
                  <input type="text"
-                 class="form-control col-sm-5" id="avatar" placeholder="Enter avatar" readonly>
+                 class="form-control col-sm-5" id="avatar" placeholder="Enter avatar">
                  
                  <label for="naziv">Registration Date:</label>
                  <input type="date"
@@ -95,7 +95,7 @@
 
             </div>
 	        <button id="changePassword" onclick="submitUpdatePassword()" type="submit" class="btn btn-success">Change Password</button> 
-	        <button id="back5" class="btn btn-primary" onclick="goBackToStartAdmin()">Go Back</button>
+	        <button id="back2" class="btn btn-primary" onclick="goBackToStartAdmin()">Go Back</button>
 		</div>
 		
 	   
@@ -122,7 +122,7 @@
 	        </table>
 	        <button id="addingPost" class="btn btn-success" onclick="showFormAddPost()">Add Post</button>
 	        <button id="allPostsShow" class="btn btn-primary" onclick="ShowAllPosts()">All Posts</button>
-	        <button id="back1" class="btn btn-primary" onclick="goBackToStartAdmin()">Go Back</button>
+	        <button id="back3" class="btn btn-primary" onclick="goBackToStartAdmin()">Go Back</button>
 		</div>
 		
 <!-- Form for adding post -->
@@ -137,10 +137,6 @@
                  <label for="naziv">Opis:</label>
                  <input type="text"
                  class="form-control col-sm-5" id="text" placeholder="Enter text">
-
-                 <label for="naziv">Creation date:</label>
-                 <input type="date"
-                 class="form-control col-sm-5" id="creationDate" placeholder="Enter creation date">
                  
                  <label for="naziv">Image path:</label>
                  <input type="text"
@@ -158,7 +154,7 @@
 
             <button id="btnAddPost" onclick="submitPost()" type="submit" class="btn btn-success">Add</button>
             <button id="editPost" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdatePost()">Update</button>  
-            <button id="back2" class="btn btn-primary" onclick="goBackFromAddingUpdatePost()">Go back</button>
+            <button id="back4" class="btn btn-primary" onclick="goBackFromAddingUpdatePost()">Go back</button>
         </div>
         
         
@@ -186,14 +182,14 @@
 	        </table>
 	        <button id="addingCommunity" class="btn btn-success" onclick="showFormAddCommunity()">Add Community</button>
 	        <button id="allCommunitiesShow" class="btn btn-primary" onclick="ShowAllCommunities()">All Communities</button>
-	        <button id="back3" class="btn btn-primary" onclick="goBackToStartAdmin()">Go Back</button>
+	        <button id="back5" class="btn btn-primary" onclick="goBackToStartAdmin()">Go Back</button>
 		</div>
 		
 <!-- Form for adding community -->
         <div id="addCommunity" style="display: none;">
         <h2>COMMUNITY ADD/UPDATE</h2>
             <div class="form-group">
-                <label for="naziv">Name:</label> 
+                <label for="naziv" id="nameCommunityLabel">Name:</label> 
                 <input type="text"
                     class="form-control col-sm-5" id="nameCommunity" placeholder="Enter Name">
                  <input type="hidden" id="idCommunity">
@@ -201,24 +197,15 @@
                  <label for="naziv">Description:</label>
                  <input type="text"
                  class="form-control col-sm-5" id="descriptionCommunity" placeholder="Enter Description">
-
-                 <label for="naziv">Creation date:</label>
-                 <input type="date"
-                 class="form-control col-sm-5" id="creationDateCommunity" placeholder="Enter creation date">
                  
                  <label for="naziv">Rules:</label>
                  <input type="text"
-                 class="form-control col-sm-5" id="rulesCommunity" placeholder="Enter Rules">
-                                
-                 <label for="naziv">Suspended Reason:</label>
-                 <input type="text"
-                 class="form-control col-sm-5" id="suspendedReasonCommunity" placeholder="Enter Suspended Reason">
-
+                 class="form-control col-sm-5" id="rulesCommunity" placeholder="Enter Rules">           
             </div>
 
             <button id="btnAddCommunity" onclick="submitCommunity()" type="submit" class="btn btn-success">Add</button>
             <button id="editCommunity" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdateCommunity()">Update</button>  
-            <button id="back4" class="btn btn-primary" onclick="goBackFromAddingUpdateCommunity()">Go back</button>
+            <button id="back6" class="btn btn-primary" onclick="goBackFromAddingUpdateCommunity()">Go back</button>
         </div>
 <!-- ------------------------------------------------------------------------------------------------------------------------------ -->  
     </main>

@@ -5,19 +5,16 @@ function submitRedditor(){
     var passwordInput = "";
     var emailInput = "";
     var avatarInput = "";
-	var registrationDateInput = "";
     
     userNameInput = $("#userNameRedditor").val();
     passwordInput = $("#passwordRedditor").val();
     emailInput = $("#emailRedditor").val();
     avatarInput = $("#avatarRedditor").val();
-	registrationDateInput = $("#registrationDateRedditor").val();
 
     var userNameError;
     var passwordError;
     var emailError;
     var avatarError;
-	var registrationDateError;
     
     if(userNameInput === ""){
     	userNameError = true;
@@ -35,12 +32,8 @@ function submitRedditor(){
     	avatarError = true;
         error += "\nEnter avatar!";
     }
-    if(registrationDateInput === ""){
-    	registrationDateError = true;
-        error += "\nEnter registration date!";
-    }
 
-    if(userNameError || passwordError || emailError || avatarError || registrationDateError){
+    if(userNameError || passwordError || emailError || avatarError){
         alert(error);
     }
     else{
@@ -49,7 +42,6 @@ function submitRedditor(){
             "passwordRedditor" : passwordInput,
             "emailRedditor" : emailInput,
             "avatarRedditor" : avatarInput,
-			"registrationDateRedditor" : registrationDateInput
         }
 
         $.ajax({

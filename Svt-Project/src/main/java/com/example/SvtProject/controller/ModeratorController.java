@@ -1,6 +1,7 @@
 package com.example.SvtProject.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,13 +62,15 @@ public class ModeratorController {
 
 		Community community = communityServiceInterface.findById(moderatorDTO.getIdCommunity());
 		
+		Date creationDate = new Date();
+		
 		Moderator moderator = new Moderator();
 		moderator.setUserName(moderatorDTO.getUserNameModerator());
 		moderator.setPassword(moderatorDTO.getPasswordModerator());
 		moderator.setEmail(moderatorDTO.getEmailModerator());
 		moderator.setAvatar(moderatorDTO.getAvatarModerator());
 		moderator.setBanned(moderatorDTO.isBanned());
-		moderator.setRegistrationDate(moderatorDTO.getRegistrationDateModerator());
+		moderator.setRegistrationDate(creationDate);
 		moderator.setUserType(UserType.MODERATOR);
 		moderator.setCommunity(community);
 		
@@ -88,7 +91,6 @@ public class ModeratorController {
 		moderator.setEmail(moderatorDTO.getEmailModerator());
 		moderator.setAvatar(moderatorDTO.getAvatarModerator());
 		moderator.setBanned(moderatorDTO.isBanned());
-		moderator.setRegistrationDate(moderatorDTO.getRegistrationDateModerator());
 
 		moderator = moderatorServiceInterface.save(moderator);
 		return new ResponseEntity<ModeratorDTO>(new ModeratorDTO(moderator), HttpStatus.OK);

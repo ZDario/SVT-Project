@@ -1,7 +1,10 @@
 package com.example.SvtProject.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,15 +19,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.SvtProject.dto.CommunityDTO;
+import com.example.SvtProject.dto.PostDTO;
 import com.example.SvtProject.model.Community;
+import com.example.SvtProject.model.Post;
 import com.example.SvtProject.serviceInterface.CommunityServiceInterface;
+import com.example.SvtProject.serviceInterface.PostServiceInterface;
 
 @RestController
 @RequestMapping(value = "api/community")
 public class CommunityController {
 	
+	public static final String COMMUNITY_KEY = "communityPosts";
+	
 	@Autowired
 	CommunityServiceInterface communityServiceInterface;
+	
+	@Autowired
+	PostServiceInterface postServiceInterface;
 	
 	@GetMapping
 	public ResponseEntity<List<CommunityDTO>> getCommunities(){
@@ -48,16 +59,57 @@ public class CommunityController {
 		return new ResponseEntity<CommunityDTO>(new CommunityDTO(community), HttpStatus.OK);
 	}
 	
+	@GetMapping(value = "/posts")
+	public ResponseEntity<List<PostDTO>> getPostsFromCommunity(HttpSession session){
+				
+		Community community = (Community) session.getAttribute(COMMUNITY_KEY);
+		
+		if(community == null) {
+			return new ResponseEntity<List<PostDTO>>(HttpStatus.NOT_FOUND);
+		}else {
+			List<Post> posts = postServiceInterface.findAllByCommunity(community);
+			List<PostDTO> postDTO = new ArrayList<PostDTO>();
+			for (Post post : posts) {
+				PostDTO dto = new PostDTO(post);
+				postDTO.add(dto);
+			}
+			return new ResponseEntity<List<PostDTO>>(postDTO, HttpStatus.OK);
+		}
+	}
+	
+	@GetMapping(value = "/{id}/posts")
+	public ResponseEntity<List<PostDTO>> getPostsFromCommunityRedditor(@PathVariable("id") Long id, HttpSession session){
+				
+		Community community = communityServiceInterface.findOne(id);
+		
+		if(community == null) {
+			return new ResponseEntity<List<PostDTO>>(HttpStatus.NOT_FOUND);
+		}else {
+			List<Post> posts = postServiceInterface.findAllByCommunity(community);
+			List<PostDTO> postDTO = new ArrayList<PostDTO>();
+			for (Post post : posts) {
+				session.setAttribute(PostController.CHOSEN_POST, post);
+				PostDTO dto = new PostDTO(post);
+				postDTO.add(dto);
+			}
+			return new ResponseEntity<List<PostDTO>>(postDTO, HttpStatus.OK);
+		}
+		
+	}
+	
 	@PostMapping
 	public ResponseEntity<CommunityDTO> addCommunity(@RequestBody CommunityDTO communityDTO){
 
+		String suspendedReason = "none"; 
+		Date creationDate = new Date();
+		
 		Community community = new Community();
 		community.setName(communityDTO.getName());
 		community.setDescription(communityDTO.getDescription());
-		community.setCreationDate(communityDTO.getCreationDate());
+		community.setCreationDate(creationDate);
 		community.setRules(communityDTO.getRules());
 		community.setSuspended(communityDTO.isSuspended());
-		community.setSuspendedReason(communityDTO.getSuspendedReason());
+		community.setSuspendedReason(suspendedReason);
 		
 		community = communityServiceInterface.save(community);
 		return new ResponseEntity<CommunityDTO>(new CommunityDTO(community), HttpStatus.CREATED);
@@ -71,12 +123,8 @@ public class CommunityController {
 		if(community == null) {
 			return new ResponseEntity<CommunityDTO>(HttpStatus.BAD_REQUEST);
 		}
-		community.setName(communityDTO.getName());
 		community.setDescription(communityDTO.getDescription());
-		community.setCreationDate(communityDTO.getCreationDate());
 		community.setRules(communityDTO.getRules());
-		community.setSuspended(communityDTO.isSuspended());
-		community.setSuspendedReason(communityDTO.getSuspendedReason());
 
 		community = communityServiceInterface.save(community);
 		return new ResponseEntity<CommunityDTO>(new CommunityDTO(community), HttpStatus.OK);

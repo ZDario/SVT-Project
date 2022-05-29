@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.SvtProject.model.Community;
 import com.example.SvtProject.model.Post;
 import com.example.SvtProject.repository.PostRepository;
 import com.example.SvtProject.serviceInterface.PostServiceInterface;
@@ -39,6 +40,11 @@ public class PostService implements PostServiceInterface{
 	public void remove(Long id) {
 		postRepository.deleteById(id);
 		
+	}
+	
+	@Override
+	public List<Post> findAllByCommunity(Community community) {
+		return postRepository.findByCommunity(community);
 	}
 
 }
