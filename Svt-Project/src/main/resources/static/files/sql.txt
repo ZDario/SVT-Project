@@ -5,8 +5,8 @@ USE svt_project;
 SELECT * FROM user;
 SELECT * FROM community;
 SELECT * FROM post;
-
-DELETE FROM user WHERE id_user > 7;
+SELECT * FROM reaction;
+SELECT * FROM comment;
 
 
 
@@ -38,7 +38,29 @@ INSERT INTO user(dtype, user_name, password, email, avatar, is_banned, registrat
 INSERT INTO post(title, text, creation_date, image_path, community, user) VALUES('Sumo news', 'Yokozuna Hakuho retirement after several records beaten', '2020-09-25', 'neka putanja', 1, 2);
 INSERT INTO post(title, text, creation_date, image_path, community, user) VALUES('Serbia wins gold', 'Serbia wins gold in shooting at olympic games in Rio', '2021-07-04', 'neka putanja', 1, 3);
 INSERT INTO post(title, text, creation_date, image_path, community, user) VALUES('New spieces found', 'Scientists found new spieces of fish under 4000m in Pacific', '2022-03-21', 'neka putanja', 3, 4);
-
 INSERT INTO post(title, text, creation_date, image_path, community, user) VALUES('Ukraine Russian War', 'War still rages on in Ukraine and there is no sign of slowing down', '2022-04-24', 'neka putanja', 2, 5);
 INSERT INTO post(title, text, creation_date, image_path, community, user) VALUES('Facebook new name', 'Facebook officially announced that is changing its name into Meta', '2021-07-04', 'neka putanja', 3, 4);
 INSERT INTO post(title, text, creation_date, image_path, community, user) VALUES('Elon Musk buys twitter', 'Elon Musk buys twitter for $44 billion', '2022-03-21', 'neka putanja', 2, 6);
+
+
+INSERT INTO reaction(time_stamp, reaction_type, post, user) VALUES('2022-04-12', 'UPVOTE', 1, 2);
+INSERT INTO reaction(time_stamp, reaction_type, post, user) VALUES('2021-10-02', 'UPVOTE', 2, 3);
+INSERT INTO reaction(time_stamp, reaction_type, post, user) VALUES('2021-04-29', 'DOWNVOTE', 3, 3);
+INSERT INTO reaction(time_stamp, reaction_type, post, user) VALUES('2020-03-08', 'UPVOTE', 1, 2);
+INSERT INTO reaction(time_stamp, reaction_type, post, user) VALUES('2022-09-05', 'UPVOTE', 2, 4);
+INSERT INTO reaction(time_stamp, reaction_type, post, user) VALUES('2021-12-13', 'UPVOTE', 3, 4);
+INSERT INTO reaction(time_stamp, reaction_type, post, user) VALUES('2020-06-22', 'DOWNVOTE', 1, 5);
+INSERT INTO reaction(time_stamp, reaction_type, post, user) VALUES('2022-01-12', 'UPVOTE', 2, 5);
+
+INSERT INTO comment(time_stamp, text, is_deleted, post, user) VALUES('2022-01-12', 'Good comment', false, 2, 5);
+INSERT INTO comment(time_stamp, text, is_deleted, post, user) VALUES('2022-04-12', 'Bad comment', true, 1, 2);
+INSERT INTO comment(time_stamp, text, is_deleted, post, user) VALUES('2021-10-02', 'I like what i see', false, 2, 3);
+INSERT INTO comment(time_stamp, text, is_deleted, post, user) VALUES('2021-04-29', 'Not bad video', true, 3, 3);
+INSERT INTO comment(time_stamp, text, is_deleted, post, user) VALUES('2020-03-08', 'Good job', false, 1, 2);
+INSERT INTO comment(time_stamp, text, is_deleted, post, user) VALUES('2022-09-05', 'Nice work', false, 2, 4);
+INSERT INTO comment(time_stamp, text, is_deleted, post, user) VALUES('2021-12-13', 'Eh, could have been better', false, 3, 4);
+INSERT INTO comment(time_stamp, text, is_deleted, post, user) VALUES('2020-06-22', 'Very nice', false, 1, 5);
+INSERT INTO comment(time_stamp, text, is_deleted, post, user) VALUES('2020-03-08', 'Not bad at all', false, 1, 2);
+INSERT INTO comment(time_stamp, text, is_deleted, post, user) VALUES('2022-09-05', 'LMAO', false, 2, 4);
+INSERT INTO comment(time_stamp, text, is_deleted, post, user) VALUES('2021-12-13', 'Yes I love it', false, 3, 4);
+INSERT INTO comment(time_stamp, text, is_deleted, post, user) VALUES('2020-06-22', 'Good job', false, 1, 5);
