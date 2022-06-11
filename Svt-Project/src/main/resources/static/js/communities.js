@@ -60,14 +60,10 @@ function ShowAllCommunitiesForRedditor(){
                 for(community in result){
                     tbodyCommunity.append(
                     '<tr>'
-                			
-                        +'<td align="center">'+result[community].idCommunity+'</td>'
                         +'<td align="center">'+result[community].name+'</td>'
-                        +'<td align="center">'+result[community].description+'</a>'+'</td>'
+                        +'<td align="center">'+result[community].description+'</td>'
                         +'<td align="center">'+result[community].creationDate+'</td>'
                         +'<td align="center">'+result[community].rules+'</td>'
-						+'<td align="center">'+result[community].isSuspended+'</td>'
-						+'<td align="center">'+result[community].suspendedReason+'</td>'
                         +'<td>'
 							+'<button type="submit" class="btn btn-primary" style="margin-right: 5%;" onclick="showAllPostsFromCommunity('+result[community].idCommunity+')">POSTS</button>'
                         +'</td>'
@@ -110,11 +106,14 @@ function showAllPostsFromCommunity(id){
                 	tbodyPostsFromCommunityRedditor.append(
                     '<tr>'
                         +'<td align="center">'+result[post].title+'</td>'
-                        +'<td align="center">'+result[post].text+'</a>'+'</td>'
+                        +'<td align="center">'+result[post].text+'</td>'
                         +'<td align="center">'+result[post].creationDate+'</td>'
                         +'<td align="center">'+result[post].imagePath+'</td>'
-						+'<td align="center">'+result[post].idCommunity+'</td>'
-						+'<td align="center">'+result[post].idUser+'</td>'
+						+'<td align="center">'+result[post].name+'</td>'
+						+'<td align="center">'+result[post].userName+'</td>'
+						+'<td>'
+							+'<button type="submit" class="btn btn-primary" style="margin-right: 5%;" onclick="showAllCommentsFromPostsFromCommunity('+result[post].idPost+')">COMMENTS</button>'
+                        +'</td>'
                     +'</tr>'
                   
                     )};
@@ -127,6 +126,44 @@ function showAllPostsFromCommunity(id){
         });
     }
     showAllPostsFromCommunityRedditor();
+    
+}
+
+function showAllCommentsFromPostsFromCommunity(id){
+	
+	var tableCommentsFromPostsFromCommunityRedditor = $("#tableCommentsFromPostsFromCommunityRedditor");
+    var tbodyCommentsFromPostsFromCommunityRedditor = $("#tbodyCommentsFromPostsFromCommunityRedditor");
+
+    function showAllCommentsFromPostsFromCommunityRedditor(){
+
+	$('#tableCommentsFromPostsFromCommunityRedditor').show();
+	
+        $.ajax({
+
+            type: "GET",
+            contentType : 'application/json; charset=utf-8',
+            url : "http://localhost:8080/api/post/"+ id + "/comments",
+            success : function(result){
+            	tableCommentsFromPostsFromCommunityRedditor.show();
+            	tbodyCommentsFromPostsFromCommunityRedditor.empty();
+                for(comment in result){
+                	tbodyCommentsFromPostsFromCommunityRedditor.append(
+                    '<tr>'
+                        +'<td align="center">'+result[comment].text+'</td>'
+                        +'<td align="center">'+result[comment].timeStamp+'</td>'
+                        +'<td align="center">'+result[comment].userName+'</td>'
+                    +'</tr>'
+                  
+                    )};
+                    
+            },
+            error :function(e){
+                alert('There was some mistake!');
+            }
+
+        });
+    }
+    showAllCommentsFromPostsFromCommunityRedditor();
     
 }
 
@@ -288,6 +325,12 @@ function goBackFromAddingUpdateCommunity(){
 function goBackToCommunitiesListRedditor(){
 	$('#tablePostsFromCommunityRedditor').hide();
 	$('#tableCommunityRedditor').show();
+	$('#tableCommentsFromPostsFromCommunityRedditor').hide();
+	$('#addComment').hide();
+}//GO BACK TO TABLE POSTS FROM COMMENTS TABLE - REDDITOR
+function goBackToPostsListRedditor(){
+	$('#tablePostsFromCommunityRedditor').show();
+	$('#tableCommentsFromPostsFromCommunityRedditor').hide();
 }
 
 //FORM LIST COMMUNITY Redditor

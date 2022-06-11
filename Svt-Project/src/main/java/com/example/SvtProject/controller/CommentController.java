@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.SvtProject.dto.CommentDTO;
 import com.example.SvtProject.model.Comment;
@@ -22,6 +24,8 @@ import com.example.SvtProject.serviceInterface.CommentServiceInterface;
 import com.example.SvtProject.serviceInterface.PostServiceInterface;
 import com.example.SvtProject.serviceInterface.UserServiceInterface;
 
+@RestController
+@RequestMapping(value = "api/comment")
 public class CommentController {
 	
 	@Autowired

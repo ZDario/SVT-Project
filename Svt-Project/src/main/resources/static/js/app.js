@@ -41,7 +41,7 @@ function login(){
             	}else if(response.userType === "REDDITOR"){
         			window.location.href = "redditor.html";
         		}else if(response.userType === "MODERATOR"){
-        			window.location.href = "moderator.html";
+        			window.location.href = "redditor.html";
         		    console.log("USER: " + response);
         		}else if(response.userType === "ADMIN"){
         			window.location.href = "admin.html";

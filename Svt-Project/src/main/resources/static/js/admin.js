@@ -127,6 +127,7 @@ function goBackToStartAdmin(){
 	$('#tableCommunityRedditor').hide();
 	$('#tablePost').hide();
 	$('#tableAdmin').hide();
+	$('#tableComment').hide();
 	$('#buttons').show();
 	$('#passwordChange').hide();
 }

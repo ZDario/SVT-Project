@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.SvtProject.model.Comment;
+import com.example.SvtProject.model.Post;
 import com.example.SvtProject.repository.CommentRepository;
 import com.example.SvtProject.serviceInterface.CommentServiceInterface;
 
@@ -39,6 +40,11 @@ public class CommentService implements CommentServiceInterface{
 	public void remove(Long id) {
 		commentRepository.deleteById(id);
 		
+	}
+	
+	@Override
+	public List<Comment> findAllByPost(Post post) {
+		return commentRepository.findByPost(post);
 	}
 
 }

@@ -21,8 +21,8 @@ function ShowAllPosts(){
                         +'<td align="center">'+result[post].text+'</a>'+'</td>'
                         +'<td align="center">'+result[post].creationDate+'</td>'
                         +'<td align="center">'+result[post].imagePath+'</td>'
-						+'<td align="center">'+result[post].idCommunity+'</td>'
-						+'<td align="center">'+result[post].idUser+'</td>'
+						+'<td align="center">'+result[post].name+'</td>'
+						+'<td align="center">'+result[post].userName+'</td>'
                         +'<td>'
 							+'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="editPost('+result[post].idPost+')">UPDATE</button>'
 	                        +'<button type="submit" class="btn btn-danger" onclick="deletePost('+result[post].idPost+')">DELETE</button>'
@@ -64,8 +64,8 @@ function ShowAllPostsHomePage(){
                         +'<td align="center">'+result[post].text+'</a>'+'</td>'
                         +'<td align="center">'+result[post].creationDate+'</td>'
                         +'<td align="center">'+result[post].imagePath+'</td>'
-						+'<td align="center">'+result[post].idCommunity+'</td>'
-						+'<td align="center">'+result[post].idUser+'</td>'
+						+'<td align="center">'+result[post].name+'</td>'
+						+'<td align="center">'+result[post].userName+'</td>'
                     +'</tr>'
                     
                     )};
@@ -146,6 +146,7 @@ function submitPost(){
             data : JSON.stringify(formData),
             success: function(){
                 alert('Post is succesfully added!');
+				goBackFromAddingPost()
             },
             error : function(e){
                 alert('There was some mistake!');
@@ -259,7 +260,7 @@ function goBackToStartPost(){
 function goBackFromAddingUpdatePost(){
 	$('#tablePost').show();
 	$('#addPost').hide();
-}
+}//GO BACK FROM ADDING POST TO POST LIST - REDDITOR
 function goBackFromAddingPost(){
 	$('#tablePostsFromCommunityRedditor').show();
 	$('#addPost').hide();
@@ -276,6 +277,8 @@ function showFormAddPost(){
 	$("#tablePost").hide();
 	$("#addPost").show();
 	$('#tablePostsFromCommunityRedditor').hide();
+	$('#tableCommentsFromPostsFromCommunityRedditor').hide();
+	$('#addComment').hide();
 }
 
 function goBackFromAddingPostRedditor(){

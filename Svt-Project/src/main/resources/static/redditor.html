@@ -22,6 +22,12 @@
     <script src="js/posts.js"></script>
     <script src="js/communities.js"></script>
     <script src="js/admin.js"></script>
+    <script src="js/comments.js"></script>
+    
+    <script>document.addEventListener("DOMContentLoaded", function() {
+    	ShowAllPostsHomePage();
+    });
+    </script>
     
     <!-- Ukljucivanje css-a -->
     <link rel="stylesheet" href="css/style.css">
@@ -33,7 +39,7 @@
 	<h1>Reddit v2.0</h1>
 	
 	<div id="buttons">
-	    <button class="btn btn-primary" onclick="showFormCommunitiesRedditor()">All Communities</button>
+	    <button class="btn btn-primary" onclick="showFormCommunitiesRedditor(), ShowAllCommunitiesForRedditor()">All Communities</button>
 	    
 	    <button class="btn btn-primary" onclick="logout()" id="ButtonLogOut">Logout</button>
 	 </div> 
@@ -68,13 +74,10 @@
 	        <table class="table">
 	            <thead>
 	              <tr>
-	                <th style="text-align: center;">ID</th>
 	                <th style="text-align: center;">Name</th>
 	                <th style="text-align: center;">Description</th>
 	                <th style="text-align: center;">Creation Date</th>
 	                <th style="text-align: center;">Rules</th>
-	                <th style="text-align: center;">Is Suspended</th>
-	                <th style="text-align: center;">Suspended Reason</th>
 	                <th></th>
 	              </tr>
 	            </thead>
@@ -113,7 +116,7 @@
 		
 <!-- All posts for community -->
 		<div id="tablePostsFromCommunityRedditor" style="display: none;">
-		<h2 class="listCenter">POSTS LIST FORM COMMUNITY</h2>
+		<h2 class="listCenter">POSTS LIST FROM COMMUNITY</h2>
 	        <table class="table">
 	            <thead>
 	              <tr>
@@ -152,16 +155,54 @@
                  class="form-control col-sm-5" id="imagePath" placeholder="Enter image path">
                  
                  <label for="naziv">Community:</label>
-                 <input type="number"
+                 <input type="hidden" value="1"
                  class="form-control col-sm-5" id="community" placeholder="Enter community">
                  
                  <label for="naziv">User:</label>
-                 <input type="number"
+                 <input type="hidden" value="2"
                  class="form-control col-sm-5" id="user" placeholder="Enter user">
             </div>
 
             <button id="btnAddPost" onclick="submitPost()" type="submit" class="btn btn-success">Add</button>
             <button id="back4" class="btn btn-primary" onclick="goBackFromAddingPostRedditor()">Go back</button>
+        </div>
+<!-- ------------------------------------------------------------------------------------------------------------------------------ -->  
+
+
+<!-- All comments for posts for community -->
+		<div id="tableCommentsFromPostsFromCommunityRedditor" style="display: none;">
+		<h2 class="listCenter">COMMENTS FOR POST</h2>
+	        <table class="table">
+	            <thead>
+	              <tr>
+	                <th style="text-align: center;">Text</th>
+	                <th style="text-align: center;">Time stamp</th>
+	                <th style="text-align: center;">User</th>
+	                <th></th>
+	              </tr>
+	            </thead>
+	            <tbody id="tbodyCommentsFromPostsFromCommunityRedditor">
+	  
+	            </tbody>
+	        </table>
+	        <button id="addingComment" class="btn btn-success" onclick="showFormAddComment()">Add Comment</button>
+	        <button id="back5" class="btn btn-primary" onclick="goBackToPostsListRedditor()">Close</button>
+		</div>
+
+<!-- Form for adding comment -->
+        <div id="addComment" style="display: none;">
+        <h2>COMMENT ADD</h2>
+            <div class="form-group">
+                <label for="naziv">Text:</label> 
+                <input type="text"
+                    class="form-control col-sm-5" id="textComment" placeholder="Enter text">
+                 <input type="hidden" id="idComment">
+                 <input type="hidden" id="idPostComment" value="1">
+                 <input type="hidden" id="idUserComment" value="2">
+            </div>
+
+            <button id="btnAddComment" onclick="submitComment()" type="submit" class="btn btn-success">Add</button>
+            <button id="back6" class="btn btn-primary" onclick="goBackFromAddingCommentRedditor()">Close</button>
         </div>
 <!-- ------------------------------------------------------------------------------------------------------------------------------ -->  
         

@@ -26,16 +26,16 @@ h1 {
 	text-align:center;
 }
 
-#addingPost, #addingCommunity, #allPostsShowHomePage {
+#addingPost, #addingCommunity, #addingComment, #allPostsShowHomePage {
 	margin-left: 2.5%;
 }
 
-#back1, #back3, #back5 {
+#back1, #back3, #back5, #back7 {
 	float: right;
 	margin-right: 2.5%;
 }
 
-#passwordChange, #addPost, #addCommunity, #addRedditor, #addModerator {
+#passwordChange, #addPost, #addCommunity, #addComment, #addCommentAdmin, #addRedditor, #addModerator {
 	width:60%;
 	margin-left: 35%;
 	margin-right: 25%;
@@ -56,4 +56,8 @@ h1 {
 #ButtonLogOut {
 	float:right;
 	margin-right:10px;
+}
+
+#back6, #btnAddComment, #tableCommentsFromPostsFromCommunityRedditor {
+	margin-bottom:150px;
 }

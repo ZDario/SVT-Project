@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +18,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.SvtProject.dto.CommentDTO;
 import com.example.SvtProject.dto.PostDTO;
+import com.example.SvtProject.model.Comment;
 import com.example.SvtProject.model.Community;
 import com.example.SvtProject.model.Post;
 import com.example.SvtProject.model.User;
+import com.example.SvtProject.serviceInterface.CommentServiceInterface;
 import com.example.SvtProject.serviceInterface.CommunityServiceInterface;
 import com.example.SvtProject.serviceInterface.PostServiceInterface;
 import com.example.SvtProject.serviceInterface.UserServiceInterface;
@@ -38,6 +43,9 @@ public class PostController {
 	
 	@Autowired
 	CommunityServiceInterface communityServiceInterface;
+	
+	@Autowired
+	CommentServiceInterface commentServiceInterface;
 	
 	@GetMapping
 	public ResponseEntity<List<PostDTO>> getPosts(){
@@ -60,6 +68,28 @@ public class PostController {
 		}
 		return new ResponseEntity<PostDTO>(new PostDTO(post), HttpStatus.OK);
 	}
+	
+	
+	@GetMapping(value = "/{id}/comments")
+	public ResponseEntity<List<CommentDTO>> getCommentsFromCommunityRedditor(@PathVariable("id") Long id, HttpSession session){
+				
+		Post post = postServiceInterface.findOne(id);
+		
+		if(post == null) {
+			return new ResponseEntity<List<CommentDTO>>(HttpStatus.NOT_FOUND);
+		}else {
+			List<Comment> comments = commentServiceInterface.findAllByPost(post);
+			List<CommentDTO> commentDTO = new ArrayList<CommentDTO>();
+			for (Comment comment : comments) {
+				session.setAttribute(PostController.CHOSEN_POST, comment);
+				CommentDTO dto = new CommentDTO(comment);
+				commentDTO.add(dto);
+			}
+			return new ResponseEntity<List<CommentDTO>>(commentDTO, HttpStatus.OK);
+		}
+		
+	}
+	
 	
 	@PostMapping
 	public ResponseEntity<PostDTO> addPost(@RequestBody PostDTO postDTO){

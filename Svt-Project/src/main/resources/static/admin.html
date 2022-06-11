@@ -22,6 +22,7 @@
     <script src="js/posts.js"></script>
     <script src="js/communities.js"></script>
     <script src="js/admin.js"></script>
+    <script src="js/comments.js"></script>
     
     <!-- Ukljucivanje css-a -->
     <link rel="stylesheet" href="css/style.css">
@@ -33,9 +34,10 @@
 	<h1>Reddit v2.0</h1>
 	
 	<div id="buttons">
-	    <button class="btn btn-primary" onclick="showFormPosts()">All Posts</button>
-	    <button class="btn btn-primary" onclick="showFormCommunities()">All Communities</button>
-	    <button class="btn btn-primary" onclick="showFormProfile()">Change Password</button>
+	    <button class="btn btn-primary" onclick="showFormPosts(), ShowAllPosts()">All Posts</button>
+	    <button class="btn btn-primary" onclick="showFormCommunities(), ShowAllCommunities()">All Communities</button>
+	    <button class="btn btn-primary" onclick="showFormComments(), ShowAllComments()">All Comments</button>
+	    <button class="btn btn-primary" onclick="showFormProfile(), ShowProfileAdmin()">Change Password</button>
 	    
 	    <button class="btn btn-primary" onclick="logout()" id="ButtonLogOut">Logout</button>
 	 </div> 
@@ -206,6 +208,55 @@
             <button id="btnAddCommunity" onclick="submitCommunity()" type="submit" class="btn btn-success">Add</button>
             <button id="editCommunity" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdateCommunity()">Update</button>  
             <button id="back6" class="btn btn-primary" onclick="goBackFromAddingUpdateCommunity()">Go back</button>
+        </div>
+<!-- ------------------------------------------------------------------------------------------------------------------------------ -->  
+
+<!-- COMMENTS -->
+<!-- All comments for posts for community -->
+		<div id="tableComment" style="display: none;">
+		<h2 class="listCenter">COMMENTS LIST</h2>
+	        <table class="table">
+	            <thead>
+	              <tr>
+	              	<th style="text-align: center;">Id Comment</th>
+	                <th style="text-align: center;">Text</th>
+	                <th style="text-align: center;">Time stamp</th>
+	                <th style="text-align: center;">Id Deleted</th>
+	                <th style="text-align: center;">Id Post</th>
+	                <th style="text-align: center;">Id User</th>
+	                <th></th>
+	              </tr>
+	            </thead>
+	            <tbody id="tbodyComment">
+	  
+	            </tbody>
+	        </table>
+	        <button id="addingComment" class="btn btn-success" onclick="showFormAddCommentAdmin()">Add Comment</button>
+	        <button id="allCommentsShow" class="btn btn-primary" onclick="ShowAllComments()">All Comments</button>
+	        <button id="back7" class="btn btn-primary" onclick="goBackToStartAdmin()">Go Back</button>
+		</div>
+
+<!-- Form for adding comment -->
+        <div id="addCommentAdmin" style="display: none;">
+        <h2>COMMENT ADD/UPDATE</h2>
+            <div class="form-group">
+                <label for="naziv">Text:</label> 
+                <input type="text"
+                    class="form-control col-sm-5" id="textComment" placeholder="Enter text">
+                 <input type="hidden" id="idComment">
+                 
+                 <label for="naziv">Id Post:</label>
+                 <input type="number"
+                 class="form-control col-sm-5" id="idPostComment" placeholder="Enter post id">
+                 
+                 <label for="naziv">Id User:</label>
+                 <input type="number" 
+                 class="form-control col-sm-5" id="idUserComment" placeholder="Enter user id">
+            </div>
+
+            <button id="btnAddCommentAdmin" onclick="submitComment()" type="submit" class="btn btn-success">Add</button>
+            <button id="editComment" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdateComment()">Update</button>  
+            <button id="back8" class="btn btn-primary" onclick="goBackFromAddingCommentAdmin()">Go Back</button>
         </div>
 <!-- ------------------------------------------------------------------------------------------------------------------------------ -->  
     </main>
