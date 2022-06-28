@@ -140,4 +140,21 @@ public class CommunityController {
 		}
 		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 	}
+	
+	@PutMapping(value = "/{id}/suspend", consumes = "application/json")
+	public ResponseEntity<CommunityDTO> communitySuspend(@RequestBody CommunityDTO communityDTO, @PathVariable("id") Long id){
+
+		Community community = communityServiceInterface.findById(id);
+		
+		if(community == null) {
+			return new ResponseEntity<CommunityDTO>(HttpStatus.BAD_REQUEST);
+		}
+		boolean suspended = true;
+		
+		community.setSuspended(suspended);
+		community.setSuspendedReason(communityDTO.getSuspendedReason());
+		
+		community = communityServiceInterface.save(community);
+		return new ResponseEntity<CommunityDTO>(new CommunityDTO(community), HttpStatus.CREATED);
+	}
 }

@@ -115,8 +115,6 @@ public class PostController {
 	public ResponseEntity<PostDTO> updatePost(@RequestBody PostDTO postDTO, @PathVariable("id") Long id){
 		
 		Post post = postServiceInterface.findById(id);
-		User user = userServiceInterface.findById(postDTO.getIdUser());
-		Community community = communityServiceInterface.findById(postDTO.getIdCommunity());
 		
 		if(post == null) {
 			return new ResponseEntity<PostDTO>(HttpStatus.BAD_REQUEST);
@@ -125,8 +123,6 @@ public class PostController {
 		post.setTitle(postDTO.getTitle());
 		post.setText(postDTO.getText());
 		post.setImagePath(postDTO.getImagePath());
-		post.setUser(user);
-		post.setCommunity(community);
 
 		post = postServiceInterface.save(post);
 		return new ResponseEntity<PostDTO>(new PostDTO(post), HttpStatus.OK);

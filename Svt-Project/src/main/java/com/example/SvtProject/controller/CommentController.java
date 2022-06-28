@@ -104,6 +104,22 @@ public class CommentController {
 		}
 		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 	}
+	
+	@PutMapping(value = "/{id}/delete", consumes = "application/json")
+	public ResponseEntity<CommentDTO> commentDelete(@RequestBody CommentDTO commentDTO, @PathVariable("id") Long id){
+
+		Comment comment = commentServiceInterface.findById(id);
+		
+		if(comment == null) {
+			return new ResponseEntity<CommentDTO>(HttpStatus.BAD_REQUEST);
+		}
+		boolean deleted = true;
+		
+		comment.setDeleted(deleted);
+		
+		comment = commentServiceInterface.save(comment);
+		return new ResponseEntity<CommentDTO>(new CommentDTO(comment), HttpStatus.CREATED);
+	}
 
 
 }
