@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.SvtProject.model.Community;
+import com.example.SvtProject.model.Post;
 import com.example.SvtProject.model.Reaction;
+import com.example.SvtProject.model.ReactionType;
 import com.example.SvtProject.repository.ReactionRepository;
 import com.example.SvtProject.serviceInterface.ReactionServiceInterface;
 
@@ -41,4 +44,9 @@ public class ReactionService implements ReactionServiceInterface{
 		
 	}
 
+	@Override
+	public List<Reaction> findAllByPost(Post post) {
+		return reactionRepository.findByPost(post);
+	}
+	
 }

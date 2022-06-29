@@ -20,13 +20,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.SvtProject.dto.CommentDTO;
 import com.example.SvtProject.dto.PostDTO;
+import com.example.SvtProject.dto.ReactionDTO;
 import com.example.SvtProject.model.Comment;
 import com.example.SvtProject.model.Community;
 import com.example.SvtProject.model.Post;
+import com.example.SvtProject.model.Reaction;
 import com.example.SvtProject.model.User;
+import com.example.SvtProject.service.ReactionService;
 import com.example.SvtProject.serviceInterface.CommentServiceInterface;
 import com.example.SvtProject.serviceInterface.CommunityServiceInterface;
 import com.example.SvtProject.serviceInterface.PostServiceInterface;
+import com.example.SvtProject.serviceInterface.ReactionServiceInterface;
 import com.example.SvtProject.serviceInterface.UserServiceInterface;
 
 @RestController
@@ -46,6 +50,9 @@ public class PostController {
 	
 	@Autowired
 	CommentServiceInterface commentServiceInterface;
+	
+	@Autowired
+	ReactionServiceInterface reactionServiceInterface;
 	
 	@GetMapping
 	public ResponseEntity<List<PostDTO>> getPosts(){
@@ -71,7 +78,7 @@ public class PostController {
 	
 	
 	@GetMapping(value = "/{id}/comments")
-	public ResponseEntity<List<CommentDTO>> getCommentsFromCommunityRedditor(@PathVariable("id") Long id, HttpSession session){
+	public ResponseEntity<List<CommentDTO>> getCommentsFromPostRedditor(@PathVariable("id") Long id, HttpSession session){
 				
 		Post post = postServiceInterface.findOne(id);
 		
@@ -90,6 +97,25 @@ public class PostController {
 		
 	}
 	
+	@GetMapping(value = "/{id}/reactions")
+	public ResponseEntity<List<ReactionDTO>> getReactionsFromPostRedditor(@PathVariable("id") Long id, HttpSession session){
+				
+		Post post = postServiceInterface.findOne(id);
+		
+		if(post == null) {
+			return new ResponseEntity<List<ReactionDTO>>(HttpStatus.NOT_FOUND);
+		}else {
+			List<Reaction> reactions = reactionServiceInterface.findAllByPost(post);
+			List<ReactionDTO> reactionDTO = new ArrayList<ReactionDTO>();
+			for (Reaction reaction : reactions) {
+				session.setAttribute(PostController.CHOSEN_POST, reaction);
+				ReactionDTO dto = new ReactionDTO(reaction);
+				reactionDTO.add(dto);
+			}
+			return new ResponseEntity<List<ReactionDTO>>(reactionDTO, HttpStatus.OK);
+		}
+		
+	}
 	
 	@PostMapping
 	public ResponseEntity<PostDTO> addPost(@RequestBody PostDTO postDTO){
